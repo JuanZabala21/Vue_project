@@ -45,7 +45,7 @@ body {
   position: relative;
 }
 .layout-boxed {
-  background: black repeat fixed;
+  background: url(/images/vendor/adminlte/dist/boxed-bg.jpg?7799dece2c79854f63f09e7dfa528b88) repeat fixed;
 }
 /*
  * Content Wrapper - contains the main content
@@ -7979,11 +7979,7 @@ pre code {
     max-width: 58.33333333%;
   }
 
-  .col-md-8 {
-    -webkit-box-flex: 0;
-            flex: 0 0 66.66666667%;
-    max-width: 66.66666667%;
-  }
+
 
   .col-md-9 {
     -webkit-box-flex: 0;
@@ -11888,6 +11884,7 @@ input[type="button"].btn-block {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  width: 470px;
 }
 
 .card > hr {

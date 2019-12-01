@@ -1,85 +1,65 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="{{asset('css/app.css')}}">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Scripts -->
+    
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-  <!-- Left side column. contains the logo and sidebar -->
- <!-- Main Sidebar Container -->
- <aside class="main-sidebar sidebar-dark-primary elevation-4">
-   
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex"> 
-          <a href="#" class="d-block">
-          {{Auth::user()->name}}
-        </div>
-        <center><p>{{Auth::user()->type}}</p></center>
-    
-<!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-
-            <li class="nav-item">
-            <router-link to="/dashboard" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt blue"></i>
-                Inicio
-            </router-link>
-            </li>
-
-          <li class="nav-item">
-                <router-link to="/profile" class="nav-link">
-                    <i class="nav-icon fas fa-user orange"></i>
-                        Profile
-                </router-link>
-         </li>
-
-          <li class="nav-item">
-                <a class="nav-link" href="{{ route('logout') }}"
+    <div id="app">
+        <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- /.search form -->
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">MENU</li>
+        <li class="active treeview menu-open">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Inicio</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+         
+            <li><a href=""><i class="fa fa-circle-o"></i>Profile</a></li>
+            
+             <li>  <a class="nav-link" href="{{route('logout')}}"
                 onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();">
                     <i class="nav-icon fa fa-power-off red"></i>
-                        {{ __('Logout') }}
+                    <p>
+                        {{__('Logout')}}
+                    </p>
                  </a>
-
-             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                  @csrf
-             </form>
+            </form>
+          </li>
+         
         </li>
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
+    </section>
     <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Inicio
-        <small>Vue Project</small>
-      </h1>
-
-    </section>
-    
-</div>
-
-
-  </div>
-<!-- JavaScript's Import -->
-<script>src="{{asset('js/app.js')}}" </script>
-
-
-
+        <main class="py-4">
+            @yield('content')
+        </main>
+    </div>
 </body>
 </html>
