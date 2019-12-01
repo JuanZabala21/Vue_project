@@ -5,42 +5,59 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Dashboard</title>
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
   <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MENU</li>
-        <li class="active treeview menu-open">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Inicio</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-         
-            <li><a href=""><i class="fa fa-circle-o"></i>Profile</a></li>
-            
-             <li>  <a class="nav-link" href="{{route('logout')}}"
+ <!-- Main Sidebar Container -->
+ <aside class="main-sidebar sidebar-dark-primary elevation-4">
+   
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex"> 
+          <a href="#" class="d-block">
+          {{Auth::user()->name}}
+        </div>
+        <center><p>{{Auth::user()->type}}</p></center>
+    
+<!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+
+            <li class="nav-item">
+            <router-link to="/dashboard" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt blue"></i>
+                Inicio
+            </router-link>
+            </li>
+
+          <li class="nav-item">
+                <router-link to="/profile" class="nav-link">
+                    <i class="nav-icon fas fa-user orange"></i>
+                        Profile
+                </router-link>
+         </li>
+
+          <li class="nav-item">
+                <a class="nav-link" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();">
                     <i class="nav-icon fa fa-power-off red"></i>
-                    <p>
-                        {{__('Logout')}}
-                    </p>
+                        {{ __('Logout') }}
                  </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+
+             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                  @csrf
-            </form>
-          </li>
-         
+             </form>
         </li>
-    </section>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
     <!-- /.sidebar -->
   </aside>
 
@@ -52,33 +69,6 @@
         Inicio
         <small>Vue Project</small>
       </h1>
-  
-      <br>
-      <br>
-      <br>
-
-      @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">¡Bienvenido!</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    
-                    ¡Has iniciado sesión!
-                </div>
-            </div>
-        </div>
-    </div>
-
-
 
     </section>
     
@@ -88,6 +78,8 @@
   </div>
 <!-- JavaScript's Import -->
 <script>src="{{asset('js/app.js')}}" </script>
+
+
 
 </body>
 </html>
