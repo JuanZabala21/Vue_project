@@ -2031,7 +2031,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log("Respone");
         console.log(response.data);
       })["catch"](function (error) {
-        currentObj.output = error;
+        console.log(error);
       });
     }
   },
@@ -2041,7 +2041,6 @@ __webpack_require__.r(__webpack_exports__);
       'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
     axios.get("profiles").then(function (data) {
-      document.getElementById('id').innerHTML = data.data.id;
       document.getElementById('name').value = data.data.name;
       document.getElementById('email').value = data.data.email;
     })["catch"](function (e) {
@@ -38167,12 +38166,12 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm._m(0),
+    _c("h1", [_vm._v("Editar perfil")]),
     _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _vm._m(1),
+      _vm._m(0),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-9 personal-info" }, [
         _c("h3", [_vm._v("Informacion Personal")]),
@@ -38315,7 +38314,7 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(2)
+            _vm._m(1)
           ]
         )
       ])
@@ -38323,16 +38322,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h1", [
-      _vm._v("#"),
-      _c("span", { attrs: { id: "id" } }),
-      _vm._v("|Editar perfil")
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

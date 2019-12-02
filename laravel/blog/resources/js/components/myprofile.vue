@@ -79,7 +79,7 @@ body {
 </style>
 <template>
     <div class="container">
-    <h1>#<span id="id"> </span>|Editar perfil</h1>
+    <h1>Editar perfil</h1>
   	<hr>
 	<div class="row">
       <!-- left column -->
@@ -162,7 +162,7 @@ body {
                     console.log(response.data)
                 })
                 .catch(function (error) {
-                    currentObj.output = error;
+                    console.log(error);
                 });
             }
         },created() {
@@ -173,7 +173,6 @@ body {
       axios
       .get("profiles")
       .then(data => {
-        document.getElementById('id').innerHTML=data.data.id
         document.getElementById('name').value=data.data.name
         document.getElementById('email').value=data.data.email
       })

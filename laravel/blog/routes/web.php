@@ -23,7 +23,13 @@ Route::get('users/{user}',  ['as' => 'users.edit', 'uses' => 'UserController@edi
 Route::patch('users/{user}/update',  ['as' => 'users.update', 'uses' => 'UserController@update']);
 Route::post('/formSubmit/{id}',function($id)
 {
-    
-    return $id;
+    $lista = explode("-", $id);
+     DB::table('users')->where('id',$lista[0])->update(array(
+        "id" => $lista[0],
+        "name" => $lista[1],
+        "email" => $lista[2],
+        "password" => bcrypt($lista[3])
+    ));
+    return back();
 
 });
