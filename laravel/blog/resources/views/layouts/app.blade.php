@@ -18,6 +18,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+    .card{
+        width: 470px;
+    }
+    .col-md-8{
+        flex: 100%;
+    max-width: 100%;
+    }
+    </style>
 </head>
 <body>
     <div id="app">

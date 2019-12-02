@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+<style>
+.col-md-8{
+    -webkit-box-flex: 0;
+            flex: 0 0 66.66666667%;
+    max-width: 66.66666667%;
+}
+</style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -30,14 +37,14 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENU</li>
         <li class="active treeview menu-open">
-          <a href="#">
+          <a href="/home">
             <i class="fa fa-dashboard"></i> <span>Inicio</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
          
-            <li><a href=""><i class="fa fa-circle-o"></i>Profile</a></li>
+            <li><a href="/profile"><i class="fa fa-circle-o"></i>{{ Auth::user()->name }}</a></li>
             
              <li>  <a class="nav-link" href="{{route('logout')}}"
                 onclick="event.preventDefault();
@@ -62,4 +69,5 @@
         </main>
     </div>
 </body>
+
 </html>

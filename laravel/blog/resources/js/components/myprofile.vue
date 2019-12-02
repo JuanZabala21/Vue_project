@@ -79,7 +79,7 @@ body {
 </style>
 <template>
     <div class="container">
-    <h1>Editar perfil</h1>
+    <h1>#<span id="id"> </span>|Editar perfil</h1>
   	<hr>
 	<div class="row">
       <!-- left column -->
@@ -100,38 +100,38 @@ body {
       
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
-        <h3>Informacion Personala</h3>
+        <h3>Informacion Personal</h3>
         
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" method="post" @submit="formSubmit">
           <div class="form-group">
             <label class="col-lg-3 control-label">Nombre: </label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="">
+              <input id="name" class="form-control" type="text" v-model="name">
               
             </div>
           </div>
           <div class="form-group">
-            <label class="col-lg-3 control-label">Correo:</label>
+            <label class="col-lg-3 control-label" >Correo:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="email" :value="email" @input="doSomethingWith"  >
+              <input class="form-control" id="email" type="email" v-model="email"  >
             </div>
           </div>
           <div class="form-group">
-            <label class="col-md-3 control-label">Contraseña:</label>
+            <label class="col-md-3 control-label" style="white-space: nowrap;">Contraseña:</label>
             <div class="col-md-8">
-              <input class="form-control" type="password" value="">
+              <input class="form-control" id="password" type="password" v-model="password">
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-3 control-label" style="white-space: nowrap;">Confirmar contraseña:</label>
             <div class="col-md-8">
-              <input class="form-control" type="password" value="">
+              <input class="form-control" type="password" id="password_confirmation" v-model="password_confirmation" >
             </div>
           </div>
           <div class="form-group">
-            <label class="col-md-3 control-label"></label>
-            <div class="col-md-8">
-              <input type="button" class="btn btn-primary" value="Guardar cambios">
+            <label class="col-md-3 control-label" ></label>
+            <div class="col-md-8" style="white-space: nowrap;">
+              <input type="submit" class="btn btn-primary" value="Guardar cambios">
               <span></span>
               <input type="reset" class="btn btn-default" value="Cancelar">
             </div>
@@ -146,29 +146,40 @@ body {
     export default {
         data(){
             return {
-                user: {
                     name: '',
                     email: '',
                     password: '',
-                    photo: ''
-                }
+                    password_confirmation:''
             }
         },
         methods: {
-    doSomethingWith(event) {
-        this.email = event.target.value;
-        // Do other stuff, eat avocados, play zelda and admire a raccoon
-    }
-},created() {
+            formSubmit(e) {
+                e.preventDefault();
+                
+                axios.post('/formSubmit/'+document.getElementById('id').innerHTML+"-"+document.getElementById('name').value+"-"+document.getElementById('email').value+"-"+document.getElementById('password').value+"-"+document.getElementById("password_confirmation").value)
+                .then(function (response) {
+                  console.log("Respone")
+                    console.log(response.data)
+                })
+                .catch(function (error) {
+                    currentObj.output = error;
+                });
+            }
+        },created() {
+  window.axios.defaults.headers.common = {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                };
       axios
-      .get("/api/user")
+      .get("profiles")
       .then(data => {
-        console.log(data.data)
+        document.getElementById('id').innerHTML=data.data.id
+        document.getElementById('name').value=data.data.name
+        document.getElementById('email').value=data.data.email
       })
       .catch(e => {
         console.log(e);
       });
-      
   },
         mounted() {
             console.log('Component mounted.')

@@ -7979,7 +7979,11 @@ pre code {
     max-width: 58.33333333%;
   }
 
-
+  .col-md-8 {
+    -webkit-box-flex: 0;
+            flex: 0 0 66.66666667%;
+    max-width: 66.66666667%;
+  }
 
   .col-md-9 {
     -webkit-box-flex: 0;
@@ -11884,7 +11888,6 @@ input[type="button"].btn-block {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
-  width: 470px;
 }
 
 .card > hr {
