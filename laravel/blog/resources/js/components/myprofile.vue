@@ -79,7 +79,7 @@ body {
 </style>
 <template>
     <div class="container">
-    <h1>Editar perfil</h1>
+    <h1><span id="id" style="display: none"> </span>Editar perfil</h1>
   	<hr>
 	<div class="row">
       <!-- left column -->
@@ -131,7 +131,7 @@ body {
           <div class="form-group">
             <label class="col-md-3 control-label" ></label>
             <div class="col-md-8" style="white-space: nowrap;">
-              <input type="submit" class="btn btn-primary" value="Guardar cambios">
+              <input type="submit" class="btn btn-primary" onclick="location.reload()" value="Guardar cambios">
               <span></span>
               <input type="reset" class="btn btn-default" value="Cancelar">
             </div>
@@ -173,6 +173,7 @@ body {
       axios
       .get("profiles")
       .then(data => {
+        document.getElementById('id').innerHTML=data.data.id
         document.getElementById('name').value=data.data.name
         document.getElementById('email').value=data.data.email
       })
