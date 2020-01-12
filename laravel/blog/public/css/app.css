@@ -45,7 +45,7 @@ body {
   position: relative;
 }
 .layout-boxed {
-  background: url(/images/vendor/adminlte/dist/boxed-bg.jpg?7799dece2c79854f63f09e7dfa528b88) repeat fixed;
+  background: black repeat fixed;
 }
 /*
  * Content Wrapper - contains the main content
@@ -11942,6 +11942,7 @@ input[type="button"].btn-block {
 
 .card-header:first-child {
   border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+ 
 }
 
 .card-header + .list-group .list-group-item:first-child {

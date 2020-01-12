@@ -1,5 +1,11 @@
 <?php
+Route::get('/inmueble', function(){
+    return view('inmueble', ['name'=>Auth::user()->name]);
+});
 
+Route::get('/inmuebleg', function(){
+    return view('inmuebleg', ['name'=>Auth::user()->name]);
+});
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,5 +37,7 @@ Route::post('/formSubmit/{id}',function($id)
         "password" => bcrypt($lista[3])
     ));
     return back();
+});	
+   
 
-});
+

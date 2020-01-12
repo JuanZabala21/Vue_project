@@ -48,6 +48,10 @@
           </a>
          
             <li><a href="./profile"><i class="fa fa-circle-o"></i>{{ Auth::user()->name }}</a></li>
+
+            <li><a href="./inmueble"><i class="fa fa-circle-o"></i>Inmuebles Personales</a></li>
+
+            <li><a href="./inmuebleg"><i class="fa fa-circle-o"></i>Inmuebles Generales</a></li>
             
              <li>  <a class="nav-link" href="{{route('logout')}}"
                 onclick="event.preventDefault();
