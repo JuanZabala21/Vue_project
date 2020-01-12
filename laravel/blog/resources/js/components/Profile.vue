@@ -91,7 +91,7 @@ body {
           <img src="//placehold.it/100" class="avatar img-circle" id="img-out" alt="avatar">
           
           <div class="file-drop-area" style="margin-top: 0.5rem;">
-  <span class="fake-btn">Arrastre la imagen</span>
+  <span class="fake-btn">seleccione la imagen</span>
   <span class="file-msg" style="display:none"></span>
   <input class="file-input" id="img-in" type="file" accept="image/x-png,image/gif,image/jpeg" onchange="document.getElementById('img-out').src=document.getElementById('img-in').value">
 </div>

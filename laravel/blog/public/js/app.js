@@ -38283,7 +38283,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("img", {
           staticClass: "avatar img-circle",
-          attrs: { src: "//placehold.it/100", id: "img-out", alt: "avatar" }
+          attrs: { src: "//placehold.it/100", id: "img-ejemplo", alt: "avatar" }
         }),
         _vm._v(" "),
         _c(
@@ -38294,7 +38294,7 @@ var staticRenderFns = [
           },
           [
             _c("span", { staticClass: "fake-btn" }, [
-              _vm._v("Arrastre la imagen")
+              _vm._v("seleccione la imagen")
             ]),
             _vm._v(" "),
             _c("span", {
@@ -50678,8 +50678,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\laravel\blog\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel\blog\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\topicos\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\topicos\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

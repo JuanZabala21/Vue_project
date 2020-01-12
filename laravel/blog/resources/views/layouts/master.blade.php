@@ -28,13 +28,16 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
+
     <div id="app">
         <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
+      <img src="../../../public/images/green1.png" class="avatar img-circle" id="img-out" alt="avatar">
       <ul class="sidebar-menu" data-widget="tree">
+        
         <li class="header">MENU</li>
         <li class="active treeview menu-open">
           <a href="./home">
@@ -51,7 +54,7 @@
                               document.getElementById('logout-form').submit();">
                     <i class="nav-icon fa fa-power-off red"></i>
                     <p>
-                        {{__('Logout')}}
+                        {{__('Cerrar Sesión')}}
                     </p>
                  </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

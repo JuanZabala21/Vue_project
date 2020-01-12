@@ -88,10 +88,10 @@ body {
             <div class="form-group" style="width:100%;text-align:left;">
             <label class="col-md-3 control-label" style="white-space: nowrap;padding:0;max-width: 100%;margin-botton:0.5rem;">Imagen:</label>
             </div>
-          <img src="//placehold.it/100" class="avatar img-circle" id="img-out" alt="avatar">
+          <img src="//placehold.it/100" class="avatar img-circle" id="img-ejemplo" alt="avatar">
           
           <div class="file-drop-area" style="margin-top: 0.5rem;">
-  <span class="fake-btn">Arrastre la imagen</span>
+  <span class="fake-btn">seleccione la imagen</span>
   <span class="file-msg" style="display:none"></span>
   <input class="file-input" id="img-in" type="file" accept="image/x-png,image/gif,image/jpeg" onchange="document.getElementById('img-out').src=document.getElementById('img-in').value">
 </div>

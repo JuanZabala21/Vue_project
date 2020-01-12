@@ -45,7 +45,7 @@ body {
   position: relative;
 }
 .layout-boxed {
-  background: black repeat fixed;
+  background: url(/images/vendor/adminlte/dist/boxed-bg.jpg?7799dece2c79854f63f09e7dfa528b88) repeat fixed;
 }
 /*
  * Content Wrapper - contains the main content
@@ -11876,7 +11876,6 @@ input[type="button"].btn-block {
 }
 
 .card {
-  width: 470px;
   position: relative;
   display: -webkit-box;
   display: flex;
