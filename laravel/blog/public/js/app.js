@@ -2087,6 +2087,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2169,6 +2194,72 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
+    filtro: function filtro() {
+      var currentObj = this;
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      var formData = new FormData();
+      this._data.current = 1;
+      formData.append('filtro', document.getElementById('f-ubic').value);
+      axios.post("/getpinm?page=" + this._data.current, formData, config).then(function (data) {
+        console.log(data);
+        currentObj._data.max = data.data.last_page;
+        document.getElementById("tr1").style.display = "none";
+        document.getElementById("tr2").style.display = "none";
+        document.getElementById("tr3").style.display = "none";
+
+        for (var i = 0; i < data.data.data.length; i++) {
+          if (i == 0) {
+            currentObj.id1 = data.data.data[i].id;
+          } else if (i == 1) {
+            currentObj.id2 = data.data.data[i].id;
+          } else {
+            currentObj.id3 = data.data.data[i].id;
+          }
+
+          document.getElementById('tr' + (i + 1)).style.display = "block";
+
+          if (currentObj._data.current == 1) {
+            document.getElementById('id' + (i + 1)).innerHTML = i + 1;
+          } else if (currentObj._data.current == 2) {
+            document.getElementById('id' + (i + 1)).innerHTML = i + 4;
+          } else {
+            document.getElementById('id' + (i + 1)).innerHTML = i + 4 + 3 * (currentObj._data.current - 2);
+          }
+
+          document.getElementById('name' + (i + 1)).innerHTML = data.data.data[i].name;
+          document.getElementById('tipo' + (i + 1)).innerHTML = data.data.data[i].tipo;
+          document.getElementById('ubic' + (i + 1)).innerHTML = data.data.data[i].ubicacion;
+          document.getElementById('precio' + (i + 1)).innerHTML = data.data.data[i].precio;
+          document.getElementById('img' + (i + 1)).innerHTML = '<img src="/images/inmueble/' + data.data.data[i].img + '" style="max-height: 65px;" class="avatar img-circle" id="img" alt="avatar">';
+          document.getElementById("acc" + (i + 1)).style.display = "flex";
+          document.getElementById("alt" + (i + 1)).style.display = "block";
+          document.getElementById("upd" + (i + 1)).style.display = "block";
+          document.getElementById("tr" + (i + 1)).style.display = "table-row";
+        }
+
+        if (data.data.data.length < 3) {
+          for (var _i2 = data.data.data.length; _i2 < 3; _i2++) {
+            document.getElementById("tr" + (_i2 + 1)).style.display = "none";
+          }
+        }
+
+        document.getElementById("msg").style.display = "none";
+
+        if (document.getElementById("tr1").style.display == "none") {
+          if (document.getElementById("tr2").style.display == "none") {
+            if (document.getElementById("tr3").style.display == "none") {
+              document.getElementById("msg").style.display = "block";
+            }
+          }
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
     test: function test(n) {
       var _this = this;
 
@@ -2183,7 +2274,14 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       n = this._data.current;
-      axios.get("/getpinm?page=" + n).then(function (data) {
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      var formData = new FormData();
+      formData.append('filtro', document.getElementById('f-ubic').value);
+      axios.post("/getpinm?page=" + this._data.current, formData, config).then(function (data) {
         _this._data.max = data.data.last_page;
         document.getElementById("tr1").style.display = "none";
         document.getElementById("tr2").style.display = "none";
@@ -2212,7 +2310,7 @@ __webpack_require__.r(__webpack_exports__);
           document.getElementById('tipo' + (i + 1)).innerHTML = data.data.data[i].tipo;
           document.getElementById('ubic' + (i + 1)).innerHTML = data.data.data[i].ubicacion;
           document.getElementById('precio' + (i + 1)).innerHTML = data.data.data[i].precio;
-          document.getElementById('img' + (i + 1)).innerHTML = data.data.data[i].img;
+          document.getElementById('img' + (i + 1)).innerHTML = '<img src="/images/inmueble/' + data.data.data[i].img + '" style="max-height: 65px;" class="avatar img-circle" id="img" alt="avatar">';
           document.getElementById("acc" + (i + 1)).style.display = "flex";
           document.getElementById("alt" + (i + 1)).style.display = "block";
           document.getElementById("upd" + (i + 1)).style.display = "block";
@@ -2220,8 +2318,18 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         if (data.data.data.length < 3) {
-          for (var _i2 = data.data.data.length; _i2 < 3; _i2++) {
-            document.getElementById("tr" + (_i2 + 1)).style.display = "none";
+          for (var _i3 = data.data.data.length; _i3 < 3; _i3++) {
+            document.getElementById("tr" + (_i3 + 1)).style.display = "none";
+          }
+        }
+
+        document.getElementById("msg").style.display = "none";
+
+        if (document.getElementById("tr1").style.display == "none") {
+          if (document.getElementById("tr2").style.display == "none") {
+            if (document.getElementById("tr3").style.display == "none") {
+              document.getElementById("msg").style.display = "block";
+            }
           }
         }
       })["catch"](function (e) {
@@ -2334,8 +2442,18 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (data.data.data.length < 3) {
-        for (var _i3 = data.data.data.length; _i3 < 3; _i3++) {
-          document.getElementById("tr" + (_i3 + 1)).style.display = "none";
+        for (var _i4 = data.data.data.length; _i4 < 3; _i4++) {
+          document.getElementById("tr" + (_i4 + 1)).style.display = "none";
+        }
+      }
+
+      document.getElementById("msg").style.display = "none";
+
+      if (document.getElementById("tr1").style.display == "none") {
+        if (document.getElementById("tr2").style.display == "none") {
+          if (document.getElementById("tr3").style.display == "none") {
+            document.getElementById("msg").style.display = "block";
+          }
         }
       }
     })["catch"](function (e) {
@@ -2365,6 +2483,33 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2479,6 +2624,16 @@ __webpack_require__.r(__webpack_exports__);
           document.getElementById("tr" + (_i + 1)).style.display = "none";
         }
       }
+
+      document.getElementById("msg").style.display = "none";
+
+      if (document.getElementById("tr1").style.display == "none") {
+        if (document.getElementById("tr2").style.display == "none") {
+          if (document.getElementById("tr3").style.display == "none") {
+            document.getElementById("msg").style.display = "block";
+          }
+        }
+      }
     })["catch"](function (e) {
       console.log(e);
     });
@@ -2491,6 +2646,57 @@ __webpack_require__.r(__webpack_exports__);
     })["catch"](function (e) {});
   },
   methods: {
+    filtro: function filtro() {
+      var currentObj = this;
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      var formData = new FormData();
+      this._data.current = 1;
+      formData.append('filtro', document.getElementById('f-ubic').value);
+      axios.post("/getginm?page=" + this._data.current, formData, config).then(function (data) {
+        currentObj._data.max = data.data.last_page;
+        document.getElementById("tr1").style.display = "none";
+        document.getElementById("tr2").style.display = "none";
+        document.getElementById("tr3").style.display = "none";
+
+        for (var i = 0; i < data.data.data.length; i++) {
+          document.getElementById('id' + (i + 1)).innerHTML = data.data.data[i].id;
+
+          for (var j = 0; j < currentObj.users.length; j++) {
+            if (currentObj.users[j].id == data.data.data[i].id_usuario) {
+              document.getElementById('user' + (i + 1)).innerHTML = currentObj.users[j].name;
+            }
+          }
+
+          document.getElementById('name' + (i + 1)).innerHTML = data.data.data[i].name;
+          document.getElementById('ubic' + (i + 1)).innerHTML = data.data.data[i].ubicacion;
+          document.getElementById('precio' + (i + 1)).innerHTML = data.data.data[i].precio;
+          document.getElementById('img' + (i + 1)).innerHTML = '<img src="/images/inmueble/' + data.data.data[i].img + '" style="max-height: 65px;" class="avatar img-circle" id="img" alt="avatar">';
+          document.getElementById("tr" + (i + 1)).style.display = "table-row";
+        }
+
+        if (data.data.data.length < 3) {
+          for (var _i2 = data.data.data.length; _i2 < 3; _i2++) {
+            document.getElementById("tr" + (_i2 + 1)).style.display = "none";
+          }
+        }
+
+        document.getElementById("msg").style.display = "none";
+
+        if (document.getElementById("tr1").style.display == "none") {
+          if (document.getElementById("tr2").style.display == "none") {
+            if (document.getElementById("tr3").style.display == "none") {
+              document.getElementById("msg").style.display = "block";
+            }
+          }
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
     test: function test(n) {
       var _this2 = this;
 
@@ -2505,7 +2711,14 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       n = this._data.current;
-      axios.get("/getginm?page=" + n).then(function (data) {
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      var formData = new FormData();
+      formData.append('filtro', document.getElementById('f-ubic').value);
+      axios.post("/getginm?page=" + this._data.current, formData, config).then(function (data) {
         _this2._data.max = data.data.last_page;
         document.getElementById("tr1").style.display = "none";
         document.getElementById("tr2").style.display = "none";
@@ -2528,8 +2741,18 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         if (data.data.data.length < 3) {
-          for (var _i2 = data.data.data.length; _i2 < 3; _i2++) {
-            document.getElementById("tr" + (_i2 + 1)).style.display = "none";
+          for (var _i3 = data.data.data.length; _i3 < 3; _i3++) {
+            document.getElementById("tr" + (_i3 + 1)).style.display = "none";
+          }
+        }
+
+        document.getElementById("msg").style.display = "none";
+
+        if (document.getElementById("tr1").style.display == "none") {
+          if (document.getElementById("tr2").style.display == "none") {
+            if (document.getElementById("tr3").style.display == "none") {
+              document.getElementById("msg").style.display = "block";
+            }
           }
         }
       });
@@ -39358,16 +39581,107 @@ var render = function() {
               _vm._v("Inmuebles Personales")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "card-tools" }, [
-              _c(
-                "button",
-                { staticClass: "btn btn-success", on: { click: _vm.newModal } },
-                [
-                  _vm._v("Añadir "),
-                  _c("i", { staticClass: "fas fa-user-plus fa-fw" })
-                ]
-              )
-            ])
+            _c(
+              "div",
+              {
+                staticClass: "card-tools",
+                staticStyle: { "text-align": "center" }
+              },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    on: { click: _vm.newModal }
+                  },
+                  [
+                    _vm._v("Añadir "),
+                    _c("i", { staticClass: "fas fa-user-plus fa-fw" })
+                  ]
+                ),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("label", [_vm._v("Filtro de busqueda")]),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("div", { staticStyle: { "text-align": "left" } }, [
+                  _c("label", [_vm._v("Ubicacion")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      staticClass: "form-control",
+                      staticStyle: { width: "auto", display: "inline-flex" },
+                      attrs: { id: "f-ubic", type: "text", name: "ub" },
+                      on: { change: _vm.filtro }
+                    },
+                    [
+                      _c("option", { attrs: { value: "Bejuma" } }, [
+                        _vm._v("Bejuma")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Carlos Arvelo" } }, [
+                        _vm._v("Carlos Arvelo")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Diego Ibarra" } }, [
+                        _vm._v("Diego Ibarra")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Guacara" } }, [
+                        _vm._v("Guacara")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Juan José Mora" } }, [
+                        _vm._v("Juan José Mora")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Libertador" } }, [
+                        _vm._v("Libertador")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Los Guayos" } }, [
+                        _vm._v("Los Guayos")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Miranda" } }, [
+                        _vm._v("Miranda")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Montalbán" } }, [
+                        _vm._v("Montalbán")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Naguanagua" } }, [
+                        _vm._v("Naguanagua")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Puerto Cabello" } }, [
+                        _vm._v("Puerto Cabello")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "San Diego" } }, [
+                        _vm._v("San Diego")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "San Joaquín" } }, [
+                        _vm._v("San Joaquín")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Valencia" } }, [
+                        _vm._v("Valencia")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "0", selected: "" } }, [
+                        _vm._v("Ninguno")
+                      ])
+                    ]
+                  )
+                ])
+              ]
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body table-responsive p-0" }, [
@@ -39591,7 +39905,13 @@ var render = function() {
                   ]
                 )
               ])
-            ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "h2",
+              { staticStyle: { display: "none" }, attrs: { id: "msg" } },
+              [_vm._v("No hay registros disponibles...")]
+            )
           ]),
           _vm._v(" "),
           _c(
@@ -40266,9 +40586,103 @@ var render = function() {
     _c("div", { staticClass: "row mt-5" }, [
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "card", staticStyle: { width: "800px" } }, [
-          _vm._m(0),
+          _c("div", { staticClass: "card-header" }, [
+            _c("h3", { staticClass: "card-title" }, [
+              _vm._v("Inmuebles Generales")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "card-tools",
+                staticStyle: { "text-align": "center" }
+              },
+              [
+                _c("br"),
+                _vm._v(" "),
+                _c("label", [_vm._v("Filtro de busqueda")]),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("div", { staticStyle: { "text-align": "left" } }, [
+                  _c("label", [_vm._v("Ubicacion")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      staticClass: "form-control",
+                      staticStyle: { width: "auto", display: "inline-flex" },
+                      attrs: { id: "f-ubic", type: "text", name: "ub" },
+                      on: { change: _vm.filtro }
+                    },
+                    [
+                      _c("option", { attrs: { value: "Bejuma" } }, [
+                        _vm._v("Bejuma")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Carlos Arvelo" } }, [
+                        _vm._v("Carlos Arvelo")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Diego Ibarra" } }, [
+                        _vm._v("Diego Ibarra")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Guacara" } }, [
+                        _vm._v("Guacara")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Juan José Mora" } }, [
+                        _vm._v("Juan José Mora")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Libertador" } }, [
+                        _vm._v("Libertador")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Los Guayos" } }, [
+                        _vm._v("Los Guayos")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Miranda" } }, [
+                        _vm._v("Miranda")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Montalbán" } }, [
+                        _vm._v("Montalbán")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Naguanagua" } }, [
+                        _vm._v("Naguanagua")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Puerto Cabello" } }, [
+                        _vm._v("Puerto Cabello")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "San Diego" } }, [
+                        _vm._v("San Diego")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "San Joaquín" } }, [
+                        _vm._v("San Joaquín")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Valencia" } }, [
+                        _vm._v("Valencia")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "0", selected: "" } }, [
+                        _vm._v("Ninguno")
+                      ])
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]),
           _vm._v(" "),
-          _vm._m(1),
+          _vm._m(0),
           _vm._v(" "),
           _c(
             "div",
@@ -40310,14 +40724,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [_vm._v("Inmuebles Generales")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -40383,6 +40789,10 @@ var staticRenderFns = [
             _c("td", { attrs: { id: "img3" } })
           ])
         ])
+      ]),
+      _vm._v(" "),
+      _c("h2", { staticStyle: { display: "none" }, attrs: { id: "msg" } }, [
+        _vm._v("No hay registros disponibles...")
       ])
     ])
   }

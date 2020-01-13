@@ -10,6 +10,32 @@ td{
             <div class="card" style="width:800px">
               <div class="card-header">
                 <h3 class="card-title">Inmuebles Generales</h3>
+                <div class="card-tools" style="text-align:center">
+                    
+                <br>
+                <label>Filtro de busqueda</label>
+                <br>
+                <div style="text-align:left">
+                <label>Ubicacion</label>
+                <select id="f-ubic" @change="filtro" type="text" name="ub" class="form-control" style="width:auto;display: inline-flex;">
+                         <option value="Bejuma">Bejuma</option>
+                         <option value="Carlos Arvelo">Carlos Arvelo</option>
+                         <option value="Diego Ibarra">Diego Ibarra</option>
+                         <option value="Guacara">Guacara</option>
+                         <option value="Juan José Mora">Juan José Mora</option>
+                         <option value="Libertador">Libertador</option>
+                         <option value="Los Guayos">Los Guayos</option>
+                         <option value="Miranda">Miranda</option>
+                         <option value="Montalbán">Montalbán</option>
+                         <option value="Naguanagua">Naguanagua</option>
+                         <option value="Puerto Cabello">Puerto Cabello</option>
+                         <option value="San Diego">San Diego</option>
+                         <option value="San Joaquín">San Joaquín</option>
+                         <option value="Valencia">Valencia</option>
+                         <option value="0" selected>Ninguno</option>
+                       </select>
+                       </div>
+                </div>
               </div>
               
               <div class="card-body table-responsive p-0">
@@ -50,6 +76,7 @@ td{
                       <td id="img3"></td>
                     </tr>
                 </tbody></table>
+                <h2 id="msg" style="display:none;">No hay registros disponibles...</h2>
               </div>
               <!-- /.card-body -->
               <div class="card-footer" style="text-align:center">
@@ -113,6 +140,14 @@ td{
                     document.getElementById("tr"+(i+1)).style.display = "none";
                 }
             }
+            document.getElementById("msg").style.display="none"
+            if(document.getElementById("tr1").style.display=="none"){
+              if(document.getElementById("tr2").style.display=="none"){
+                if(document.getElementById("tr3").style.display=="none"){
+                  document.getElementById("msg").style.display="block"
+                }
+              }
+            }
       })
       .catch(e => {
         console.log(e);
@@ -130,6 +165,52 @@ td{
       });
   },
   methods:{
+    filtro(){
+let currentObj = this;
+      const config = {
+                    headers: { 'content-type': 'multipart/form-data' }
+                }
+                let formData = new FormData();
+                this._data.current=1
+                formData.append('filtro', document.getElementById('f-ubic').value);
+               axios.post("/getginm?page="+this._data.current, formData, config)
+                .then(function (data) {
+currentObj._data.max=data.data.last_page
+        document.getElementById("tr1").style.display="none"
+        document.getElementById("tr2").style.display="none"
+        document.getElementById("tr3").style.display="none"
+        for(let i=0;i<data.data.data.length;i++){
+                    document.getElementById('id'+(i+1)).innerHTML=data.data.data[i].id
+                    for(let j=0;j<currentObj.users.length;j++){
+                      if(currentObj.users[j].id==data.data.data[i].id_usuario){
+                        document.getElementById('user'+(i+1)).innerHTML=currentObj.users[j].name
+                      }
+                    }
+                    
+                    document.getElementById('name'+(i+1)).innerHTML=data.data.data[i].name
+                    document.getElementById('ubic'+(i+1)).innerHTML=data.data.data[i].ubicacion
+                    document.getElementById('precio'+(i+1)).innerHTML=data.data.data[i].precio
+                    document.getElementById('img'+(i+1)).innerHTML='<img src="/images/inmueble/'+data.data.data[i].img+'" style="max-height: 65px;" class="avatar img-circle" id="img" alt="avatar">'
+                    document.getElementById("tr"+(i+1)).style.display = "table-row";
+            }
+            if(data.data.data.length<3){
+                for(let i=data.data.data.length;i<3;i++){
+                    document.getElementById("tr"+(i+1)).style.display = "none";
+                }
+            }
+            document.getElementById("msg").style.display="none"
+            if(document.getElementById("tr1").style.display=="none"){
+              if(document.getElementById("tr2").style.display=="none"){
+                if(document.getElementById("tr3").style.display=="none"){
+                  document.getElementById("msg").style.display="block"
+                }
+              }
+            }
+                })
+                .catch(function (error) {
+                    console.log(error)
+                });
+    },
 test(n){
                 if(n=='prev'){
                     if(this._data.current>1){
@@ -141,8 +222,12 @@ test(n){
                     }
                 }
                 n=this._data.current
-                axios
-      .get("/getginm?page="+n)
+                const config = {
+                    headers: { 'content-type': 'multipart/form-data' }
+                }
+                let formData = new FormData();
+                formData.append('filtro', document.getElementById('f-ubic').value);
+               axios.post("/getginm?page="+this._data.current, formData, config)
       .then(data => {
         this._data.max=data.data.last_page
         document.getElementById("tr1").style.display="none"
@@ -166,6 +251,14 @@ test(n){
                 for(let i=data.data.data.length;i<3;i++){
                     document.getElementById("tr"+(i+1)).style.display = "none";
                 }
+            }
+            document.getElementById("msg").style.display="none"
+            if(document.getElementById("tr1").style.display=="none"){
+              if(document.getElementById("tr2").style.display=="none"){
+                if(document.getElementById("tr3").style.display=="none"){
+                  document.getElementById("msg").style.display="block"
+                }
+              }
             }
       })
             }
