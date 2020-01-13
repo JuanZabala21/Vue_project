@@ -20,6 +20,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('profile-component', require('./components/myprofile.vue').default);
+Vue.component('users-component', require('./components/myusers.vue').default);
 Vue.component('inmueble-component', require('./components/inmueble.vue').default);
 Vue.component('inmuebleg-component', require('./components/inmuebleg.vue').default);
 /**

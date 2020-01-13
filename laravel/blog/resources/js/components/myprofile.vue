@@ -1,4 +1,8 @@
 <style>
+img{
+  max-height: 100px;
+    max-width: 100px;
+}
 .form-group {
     margin-bottom: 0;
 }
@@ -75,6 +79,9 @@ body {
  footer a:hover {
 	 color: white;
 }
+.col-lg-3{
+  max-width:50%;
+}
  
 </style>
 <template>
@@ -83,55 +90,64 @@ body {
   	<hr>
 	<div class="row">
       <!-- left column -->
+       <form @submit="submit" role="form" method="post" enctype="multipart/form-data" style="display:contents">
       <div class="col-md-3">
         <div class="text-center">
             <div class="form-group" style="width:100%;text-align:left;">
             <label class="col-md-3 control-label" style="white-space: nowrap;padding:0;max-width: 100%;margin-botton:0.5rem;">Imagen:</label>
             </div>
-          <img src="//placehold.it/100" class="avatar img-circle" id="img-ejemplo" alt="avatar">
+          <img src="/images/default.jpg" class="avatar img-circle" id="img" alt="avatar">
           
           <div class="file-drop-area" style="margin-top: 0.5rem;">
-  <span class="fake-btn">seleccione la imagen</span>
+  <span class="fake-btn">Arrastre la imagen</span>
   <span class="file-msg" style="display:none"></span>
-  <input class="file-input" id="img-in" type="file" accept="image/x-png,image/gif,image/jpeg" onchange="document.getElementById('img-out').src=document.getElementById('img-in').value">
+  <input class="file-input" id="image" name="image" type="file" accept="image/x-png,image/gif,image/jpeg" v-on:change="onImageChange" required>
+  <input type="submit" class="btn btn-primary" value="Guardar imagen" style="margin-top: 160px;margin-left: -75px;">
 </div>
         </div>
       </div>
-      
+        </form>
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
         <h3>Informacion Personal</h3>
+        <form class="form-horizontal" role="form" method="post" @submit="formSubmit" enctype="multipart/form-data">
         
-        <form class="form-horizontal" role="form" method="post" @submit="formSubmit">
           <div class="form-group">
             <label class="col-lg-3 control-label">Nombre: </label>
             <div class="col-lg-8">
-              <input id="name" class="form-control" type="text" v-model="name">
+              <input id="name" class="form-control" type="text" v-model="name" required autocomplete="name">
+              
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Documento: </label>
+            <div class="col-lg-8">
+              <input id="document" class="form-control" type="text" v-model="document" required autocomplete="document">
               
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label" >Correo:</label>
             <div class="col-lg-8">
-              <input class="form-control" id="email" type="email" v-model="email"  >
+              <input class="form-control" id="email" type="email" v-model="email"   required autocomplete="email">
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-3 control-label" style="white-space: nowrap;">Contraseña:</label>
             <div class="col-md-8">
-              <input class="form-control" id="password" type="password" v-model="password">
+              <input class="form-control" id="password" type="password" v-model="password"  required autocomplete="new-password">
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-3 control-label" style="white-space: nowrap;">Confirmar contraseña:</label>
             <div class="col-md-8">
-              <input class="form-control" type="password" id="password_confirmation" v-model="password_confirmation" >
+              <input class="form-control" type="password" id="password_confirmation" v-model="password_confirmation"  required autocomplete="new-password" >
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-3 control-label" ></label>
             <div class="col-md-8" style="white-space: nowrap;">
-              <input type="submit" class="btn btn-primary" onclick="location.reload()" value="Guardar cambios">
+              <input type="submit" class="btn btn-primary" value="Guardar cambios">
               <span></span>
               <input type="reset" class="btn btn-default" value="Cancelar">
             </div>
@@ -146,23 +162,73 @@ body {
     export default {
         data(){
             return {
+                    id:'',
                     name: '',
                     email: '',
                     password: '',
-                    password_confirmation:''
+                    password_confirmation:'',
+              image: '',
+              success: ''
             }
         },
         methods: {
+          onImageChange(e){
+                this.image = e.target.files[0];
+            },
+          onFileSelected(event) {
+  var selectedFile = event.target.files[0];
+  var reader = new FileReader();
+
+  var imgtag = document.getElementById("img-out");
+  imgtag.title = selectedFile.name;
+
+  reader.onload = function(event) {
+    imgtag.src = event.target.result;
+  };
+
+  reader.readAsDataURL(selectedFile);
+},
+submit(e) {
+  e.preventDefault();
+        let currentObj = this;
+ 
+                const config = {
+                    headers: { 'content-type': 'multipart/form-data' }
+                }
+ 
+                let formData = new FormData();
+                formData.append('image', this.image);
+                formData.append('id', this.id);
+                axios.post('/formimage', formData, config)
+                .then(function (response) {
+                  alert('Imagen guardada con exito')
+                    currentObj.success = response.data.success;
+                })
+                .catch(function (error) {
+                    currentObj.output = error;
+                });
+
+            },
             formSubmit(e) {
                 e.preventDefault();
                 
-                axios.post('/formSubmit/'+document.getElementById('id').innerHTML+"-"+document.getElementById('name').value+"-"+document.getElementById('email').value+"-"+document.getElementById('password').value+"-"+document.getElementById("password_confirmation").value)
+                axios.post('/formSubmit',
+                {
+                    id: document.getElementById('id').innerHTML,
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    document: document.getElementById('document').value,
+                    password: document.getElementById('password').value,
+                    password_confirmation: document.getElementById("password_confirmation").value
+                    })
                 .then(function (response) {
-                  console.log("Respone")
-                    console.log(response.data)
+                    if(response.data.response==""){
+                      alert('Datos guardados con exito')
+                    }else{
+                      alert('Error en los datos suministrados')
+                    }
                 })
                 .catch(function (error) {
-                    console.log(error);
                 });
             }
         },created() {
@@ -173,12 +239,25 @@ body {
       axios
       .get("profiles")
       .then(data => {
+        this.id=data.data.id
         document.getElementById('id').innerHTML=data.data.id
+        if(data.data.img!=null){
+          document.getElementById('img').src ="/images/"+ data.data.img
+        }else{
+          document.getElementById('img').src ="/images/default.jpeg"
+        }
+
         document.getElementById('name').value=data.data.name
         document.getElementById('email').value=data.data.email
+        document.getElementById('document').value=data.data.document
       })
       .catch(e => {
-        console.log(e);
+      });
+      axios
+      .get("/getusers")
+      .then(data => {
+      })
+      .catch(e => {
       });
   },
         mounted() {
@@ -210,6 +289,27 @@ $fileInput.on('change', function() {
     // otherwise show number of files
     $textContainer.text(filesCount + ' files selected');
   }
+});
+$(function(){
+  $('#image').change(function(){
+    var input = this;
+    var url = $(this).val();
+    var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+    if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) 
+     {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+           $('#img').attr('src', e.target.result);
+        }
+       reader.readAsDataURL(input.files[0]);
+    }
+    else
+    {
+      $('#img').attr('src', '/assets/no_preview.png');
+    }
+  });
+
 });
         }
     }
