@@ -23,6 +23,7 @@ Vue.component('profile-component', require('./components/myprofile.vue').default
 Vue.component('users-component', require('./components/myusers.vue').default);
 Vue.component('inmueble-component', require('./components/inmueble.vue').default);
 Vue.component('inmuebleg-component', require('./components/inmuebleg.vue').default);
+Vue.component('chart-component', require('./components/chart.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

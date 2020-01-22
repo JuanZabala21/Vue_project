@@ -133,7 +133,7 @@ td{
                 <form @submit="submitDelete" role="form" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                   <h5 class="modal-title" id="addNewLabel">¿Eliminar tu inmueble?</h5>
-                      <input id="d-id" type="text" name="e-id">
+                      <input style="display:none" id="d-id" type="text" name="e-id">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -195,6 +195,7 @@ td{
                             class="form-control" style="margin-bottom: 1rem;" min="1" value="1">
                     </div>
                       <div class="form-group">
+                        <img style="margin: 0px auto 15px auto;max-width: 100px;" id="e-img"  class="form-control">
                         <input id="e-image" name="Foto" class="form-control"
                         type="file" accept="image/x-png,image/gif,image/jpeg" v-on:change="onImageChange" required>
                     </div>
@@ -339,6 +340,10 @@ td{
                   document.getElementById('e-precio').value=response.data.data[0].precio;
                   document.getElementById("e-tipo").selectedIndex = ti;
                   document.getElementById("e-ubic").selectedIndex = ub;
+                  document.getElementById('e-image').value = "";
+                  document.getElementById('e-img').src="/images/inmueble/"+response.data.data[0].img
+                  console.log(document.getElementById('e-img'))
+                  console.log("/images/inmueble/"+response.data.data[0].img)
                   $('#edit').modal('show');
                 })
                 .catch(function (error) {
@@ -504,14 +509,13 @@ td{
                 const config = {
                     headers: { 'content-type': 'multipart/form-data' }
                 }
- 
                 let formData = new FormData();
                 formData.append('id', document.getElementById('e-id').value);
                 formData.append('name', document.getElementById('e-name').value);
                 formData.append('tipo', document.getElementById('e-tipo').value);
                 formData.append('ubic', document.getElementById('e-ubic').value);
                 formData.append('precio', document.getElementById('e-precio').value);
-                formData.append('image', this.image);
+                  formData.append('image', this.image);
                axios.post('/updateInm', formData, config)
                 .then(function (response) {
                   alert('Inmueble actualizado con exito')
@@ -558,6 +562,7 @@ td{
             }
       },
       created() {
+        
         axios
       .get("/getpinm")
       .then(data => {
@@ -616,6 +621,55 @@ td{
   },
         mounted() {
             console.log('Component mounted.')
+            const $ = require('jquery')
+var $fileInput = $('.file-input');
+var $droparea = $('.file-drop-area');
+
+// highlight drag area
+$fileInput.on('dragenter focus click', function() {
+  $droparea.addClass('is-active');
+});
+
+// back to normal state
+$fileInput.on('dragleave blur drop', function() {
+  $droparea.removeClass('is-active');
+});
+
+// change inner text
+$fileInput.on('change', function() {
+  var filesCount = $(this)[0].files.length;
+  var $textContainer = $(this).prev();
+
+  if (filesCount === 1) {
+    // if single file is selected, show file name
+    var fileName = $(this).val().split('\\').pop();
+    $textContainer.text(fileName);
+  } else {
+    // otherwise show number of files
+    $textContainer.text(filesCount + ' files selected');
+  }
+});
+$(function(){
+  $('#e-image').change(function(){
+    var input = this;
+    var url = $(this).val();
+    var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+    if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) 
+     {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+           $('#e-img').attr('src', e.target.result);
+        }
+       reader.readAsDataURL(input.files[0]);
+    }
+    else
+    {
+      $('#e-img').attr('src', '/assets/no_preview.png');
+    }
+  });
+
+});
         }
     }
 </script>

@@ -8,9 +8,13 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::post('login', 'AuthController@login');
+Route::group(['middleware' => 'auth'], function () {
 Route::get('/home', function(){
     return view('profile', ['name'=>Auth::user()->name]);
 })->name('profile');
+Route::get('/charts', function(){
+    return view('chart', ['name'=>Auth::user()->name]);
+})->name('charts');
 Route::get('/inmueble-personal', function(){
     return view('inmueble', ['name'=>Auth::user()->name]);
 })->name('inmueble-personal');
@@ -20,9 +24,34 @@ Route::get('/inmueble-general', function(){
 Route::get('/getalluser',function(){
     return DB::table('users')->get();
 });
+Route::get('/getallinm',function(){
+    return DB::table('inmueble')->get();
+});
+Route::post('/getginm',function(Request $request){
+    if(Auth::user()->admin==0){
+        if($request->filtro!=="0"){
+            return (DB::table('inmueble')->where('ubicacion', '=', $request->filtro)->paginate(3));
+        }else{
+            return (DB::table('inmueble')->paginate(3));
+        }
+    }else{
+        abort(404);
+    }
+});
+Route::post('/getpinm',function(Request $request){
+    if(Auth::user()->admin==0){
+        if($request->filtro!=="0"){
+            return (DB::table('inmueble')->where([['id_usuario','=', Auth::user()->id],['ubicacion', '=', $request->filtro]])->paginate(3));
+        }else{
+            return (DB::table('inmueble')->where('id_usuario','=', Auth::user()->id)->paginate(3));
+        }
+    }else{
+        abort(404);
+    }
+});
 Route::get('/getpinm',function(Request $request){
     if(Auth::user()->admin==0){
-        return (DB::table('inmueble')->where('id_usuario','=', Auth::user()->id)->paginate(3));
+            return (DB::table('inmueble')->where('id_usuario','=', Auth::user()->id)->paginate(3));
     }else{
         abort(404);
     }
@@ -188,4 +217,5 @@ Route::post('/updateusers',function(){
         }
         
 
+});
 });

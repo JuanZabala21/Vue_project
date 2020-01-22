@@ -39,19 +39,25 @@
         
 
         @if (Request::is('home'))
-        <li class="active treeview menu-open">
+          <li class="active treeview menu-open">
         @else
-        <li>
-        @endif
+          <li>
+          @endif
         <a href="./home"><i class="fa fa-circle-o"></i>{{ Auth::user()->name }}</a></li>
         @if(Auth::user()->admin==1)
           @if (Request::is('usuarios'))
-          <li class="active treeview menu-open">
+            <li class="active treeview menu-open">
           @else
-          <li>
-          @endif
+            <li>
+            @endif
           <a href="./usuarios"><i class="fa fa-circle-o"></i>Usuarios</a></li>
+          @if (Request::is('charts'))
+            <li class="active treeview menu-open">
           @else
+            <li>
+            @endif
+          <a href="./charts"><i class="fa fa-circle-o"></i>Estadisticas</a></li>
+        @else
           @if (Request::is('inmueble-personal'))
           <li class="active treeview menu-open">
           @else
