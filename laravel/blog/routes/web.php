@@ -71,22 +71,27 @@ Route::post('/get1inm',function(Request $request){
     }
 });
 Route::post('/updateInm',function(Request $request){
-    $request->validate([
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ]);
-    $images = DB::table('inmueble')->get();
-    $imageName = sizeof($images).'.'.$request->image->extension();  
-
-    $request->image->move(public_path('images/inmueble'), $imageName);
-    DB::table('inmueble')->where('id',$request->id)->update(array(
-        'tipo' => $request->tipo, 
-        'ubicacion' => $request->ubic, 
-        'precio' => $request->precio,
-        'img' => $imageName,
-        'name'=>$request->name
-    ));
-    return response()->json(['success'=>'You have successfully upload image.']);
-
+    if($request->band==1){
+        $images = DB::table('inmueble')->get();
+        $imageName = sizeof($images).'.'.$request->image->extension();  
+        $request->image->move(public_path('images/inmueble'), $imageName);
+        DB::table('inmueble')->where('id',$request->id)->update(array(
+            'tipo' => $request->tipo, 
+            'ubicacion' => $request->ubic, 
+            'precio' => $request->precio,
+            'img' => $imageName,
+            'name'=>$request->name
+        ));
+        return response()->json(['success'=>'You have successfully upload image.']);
+    }else{
+        DB::table('inmueble')->where('id',$request->id)->update(array(
+            'tipo' => $request->tipo, 
+            'ubicacion' => $request->ubic, 
+            'precio' => $request->precio,
+            'name'=>$request->name
+        ));
+        return response()->json(['success'=>'You have successfully upload image.']);
+    }
     });
 Route::post('/deleteInm',function(Request $request){
     DB::table('inmueble')->where('id',$request->id)->delete();

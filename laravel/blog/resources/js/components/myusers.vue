@@ -49,7 +49,7 @@ button{
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Correo</th>
-                        <th>Registrado en</th>
+                        <th>Registrado el</th>
                         <th>Modificar</th>
                   </tr>
                     </thead>
@@ -60,7 +60,7 @@ button{
                     <td id="tr1email"></td>
                     <td id="tr1release"></td>
                     <td >
-                        <a @click='update("activ","tr1id")' >
+                        <a id="activ1" @click='update("activ","tr1id")' >
                             <button id="act1" type="submit" class="btn btn-primary" style="color:black;background-color:green;display:none;">Activar</button>
                         </a>
                         <a @click='update("desact","tr1id")' >
@@ -78,7 +78,7 @@ button{
                     <td id="tr2email"></td>
                     <td id="tr2release"></td>
                     <td>
-                        <a @click='update("activ","tr2id")' >
+                        <a id="activ2" @click='update("activ","tr2id")' >
                             <button id="act2" type="submit" class="btn btn-primary" style="color:black;background-color:green;display:none;">Activar</button>
                         </a>
                         <a @click='update("desact","tr2id")' >
@@ -95,7 +95,7 @@ button{
                     <td id="tr3email"></td>
                     <td id="tr3release"></td>
                     <td>
-                        <a @click='update("activ","tr3id")' >
+                        <a id="activ3" @click='update("activ","tr3id")' >
                             <button id="act3" type="submit" class="btn btn-primary" style="color:black;background-color:green;display:none;">Activar</button>
                         </a>
                         <a @click='update("desact","tr3id")' >
@@ -111,8 +111,8 @@ button{
               <!-- /.card-body -->
               <div class="card-footer" style="text-align:center">
                   <div id="pag" class="pagination">
-  <a @click="test('prev')">&laquo;</a>
-  <a @click="test('post')">&raquo;</a>
+  <a id="btnprev" @click="test('prev')">&laquo;</a>
+  <a id="btnprost" @click="test('post')">&raquo;</a>
 </div>
 
               </div>

@@ -102,7 +102,7 @@ body {
   <span class="fake-btn">Arrastre la imagen</span>
   <span class="file-msg" style="display:none"></span>
   <input class="file-input" id="image" name="image" type="file" accept="image/x-png,image/gif,image/jpeg" v-on:change="onImageChange" required>
-  <input type="submit" class="btn btn-primary" value="Guardar imagen" style="margin-top: 160px;margin-left: -75px;">
+  <input id="saveimage" type="submit" class="btn btn-primary" value="Guardar imagen" style="margin-top: 160px;margin-left: -75px;">
 </div>
         </div>
       </div>
@@ -147,7 +147,7 @@ body {
           <div class="form-group">
             <label class="col-md-3 control-label" ></label>
             <div class="col-md-8" style="white-space: nowrap;">
-              <input type="submit" class="btn btn-primary" value="Guardar cambios">
+              <input type="submit" id="save" class="btn btn-primary" value="Guardar cambios">
               <span></span>
               <input type="reset" class="btn btn-default" value="Cancelar">
             </div>

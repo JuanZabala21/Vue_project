@@ -13,7 +13,7 @@ td{
               <div class="card-header">
                 <h3 class="card-title">Inmuebles Personales</h3>
                   <div class="card-tools" style="text-align:center">
-                    <button class="btn btn-success" @click="newModal">Añadir <i class="fas fa-user-plus fa-fw"></i></button>
+                    <button id="addbtn" class="btn btn-success" @click="newModal">Añadir <i class="fas fa-user-plus fa-fw"></i></button>
                 <br>
                 <label>Filtro de busqueda</label>
                 <br>
@@ -111,8 +111,8 @@ td{
               <!-- /.card-body -->
               <div class="card-footer" style="text-align:center">
                   <div id="pag" class="pagination">
-  <a @click="test('prev')">&laquo;</a>
-  <a @click="test('post')">&raquo;</a>
+  <a id="btnprev" @click="test('prev')">&laquo;</a>
+  <a id="btnpost" @click="test('post')">&raquo;</a>
 </div>
 
               </div>
@@ -137,7 +137,7 @@ td{
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Eliminar</button>
+                    <button id="btndelete" type="submit" class="btn btn-primary">Eliminar</button>
                 </div>
                 </form>
               </div>
@@ -197,12 +197,12 @@ td{
                       <div class="form-group">
                         <img style="margin: 0px auto 15px auto;max-width: 100px;" id="e-img"  class="form-control">
                         <input id="e-image" name="Foto" class="form-control"
-                        type="file" accept="image/x-png,image/gif,image/jpeg" v-on:change="onImageChange" required>
+                        type="file" accept="image/x-png,image/gif,image/jpeg" v-on:change="onImageChange">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <button type="submit" id="actualizar" class="btn btn-primary">Actualizar</button>
                 </div>
                 </form>
               </div>
@@ -265,7 +265,7 @@ td{
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Añadir</button>
+                    <button type="submit" id="anadir" class="btn btn-primary">Añadir</button>
                 </div>
                 </form>
               </div>
@@ -384,7 +384,26 @@ td{
                     }
                     
                     document.getElementById('name'+(i+1)).innerHTML=data.data.data[i].name
-                    document.getElementById('tipo'+(i+1)).innerHTML=data.data.data[i].tipo
+                    switch(data.data.data[i].tipo){
+                      case  "0":
+                        document.getElementById('tipo'+(i+1)).innerHTML="Terreno"
+                        break
+                      case "1":
+                        document.getElementById('tipo'+(i+1)).innerHTML="Apartamento"
+                        break
+                      case "2":
+                        document.getElementById('tipo'+(i+1)).innerHTML="Casa"
+                        break
+                      case "3":
+                        document.getElementById('tipo'+(i+1)).innerHTML="Fábrica"
+                        break
+                      case "4":
+                        document.getElementById('tipo'+(i+1)).innerHTML="Local"
+                        break
+                      case "5":
+                        document.getElementById('tipo'+(i+1)).innerHTML="Parcela"
+                        break
+                    }
                     document.getElementById('ubic'+(i+1)).innerHTML=data.data.data[i].ubicacion
                     document.getElementById('precio'+(i+1)).innerHTML=data.data.data[i].precio
                     document.getElementById('img'+(i+1)).innerHTML='<img src="/images/inmueble/'+data.data.data[i].img+'" style="max-height: 65px;" class="avatar img-circle" id="img" alt="avatar">'
@@ -453,7 +472,26 @@ td{
                     }
                     
                     document.getElementById('name'+(i+1)).innerHTML=data.data.data[i].name
-                    document.getElementById('tipo'+(i+1)).innerHTML=data.data.data[i].tipo
+                    switch(data.data.data[i].tipo){
+                      case  "0":
+                        document.getElementById('tipo'+(i+1)).innerHTML="Terreno"
+                        break
+                      case "1":
+                        document.getElementById('tipo'+(i+1)).innerHTML="Apartamento"
+                        break
+                      case "2":
+                        document.getElementById('tipo'+(i+1)).innerHTML="Casa"
+                        break
+                      case "3":
+                        document.getElementById('tipo'+(i+1)).innerHTML="Fábrica"
+                        break
+                      case "4":
+                        document.getElementById('tipo'+(i+1)).innerHTML="Local"
+                        break
+                      case "5":
+                        document.getElementById('tipo'+(i+1)).innerHTML="Parcela"
+                        break
+                    }
                     document.getElementById('ubic'+(i+1)).innerHTML=data.data.data[i].ubicacion
                     document.getElementById('precio'+(i+1)).innerHTML=data.data.data[i].precio
                     document.getElementById('img'+(i+1)).innerHTML='<img src="/images/inmueble/'+data.data.data[i].img+'" style="max-height: 65px;" class="avatar img-circle" id="img" alt="avatar">'
@@ -505,7 +543,10 @@ td{
             submitUpdate(e) {
           e.preventDefault();
           let currentObj = this;
- 
+          let band=1
+          if(document.getElementById("e-image").files.length == 0){
+            band=0
+          }
                 const config = {
                     headers: { 'content-type': 'multipart/form-data' }
                 }
@@ -516,6 +557,7 @@ td{
                 formData.append('ubic', document.getElementById('e-ubic').value);
                 formData.append('precio', document.getElementById('e-precio').value);
                   formData.append('image', this.image);
+                  formData.append('band', band);
                axios.post('/updateInm', formData, config)
                 .then(function (response) {
                   alert('Inmueble actualizado con exito')
@@ -581,7 +623,26 @@ td{
                     document.getElementById('tr'+(i+1)).style.display="block"
                     document.getElementById('id'+(i+1)).innerHTML=i+1
                     document.getElementById('name'+(i+1)).innerHTML=data.data.data[i].name
-                    document.getElementById('tipo'+(i+1)).innerHTML=data.data.data[i].tipo
+                    switch(data.data.data[i].tipo){
+                      case  "0":
+                        document.getElementById('tipo'+(i+1)).innerHTML="Terreno"
+                        break
+                      case "1":
+                        document.getElementById('tipo'+(i+1)).innerHTML="Apartamento"
+                        break
+                      case "2":
+                        document.getElementById('tipo'+(i+1)).innerHTML="Casa"
+                        break
+                      case "3":
+                        document.getElementById('tipo'+(i+1)).innerHTML="Fábrica"
+                        break
+                      case "4":
+                        document.getElementById('tipo'+(i+1)).innerHTML="Local"
+                        break
+                      case "5":
+                        document.getElementById('tipo'+(i+1)).innerHTML="Parcela"
+                        break
+                    }
                     document.getElementById('ubic'+(i+1)).innerHTML=data.data.data[i].ubicacion
                     document.getElementById('precio'+(i+1)).innerHTML=data.data.data[i].precio
                     document.getElementById('img'+(i+1)).innerHTML='<img src="/images/inmueble/'+data.data.data[i].img+'" style="max-height: 65px;" class="avatar img-circle" id="img" alt="avatar">'

@@ -50,29 +50,29 @@
           @else
             <li>
             @endif
-          <a href="./usuarios"><i class="fa fa-circle-o"></i>Usuarios</a></li>
+          <a id="users" href="./usuarios"><i class="fa fa-circle-o"></i>Usuarios</a></li>
           @if (Request::is('charts'))
             <li class="active treeview menu-open">
           @else
             <li>
             @endif
-          <a href="./charts"><i class="fa fa-circle-o"></i>Estadisticas</a></li>
+          <a id="charts" href="./charts"><i class="fa fa-circle-o"></i>Estadisticas</a></li>
         @else
           @if (Request::is('inmueble-personal'))
           <li class="active treeview menu-open">
           @else
           <li>
           @endif
-          <a href="./inmueble-personal"><i class="fa fa-circle-o"></i>Inmuebles personales</a></li>
+          <a id="inmueble-p" href="./inmueble-personal"><i class="fa fa-circle-o"></i>Inmuebles personales</a></li>
           @if (Request::is('inmueble-general'))
           <li class="active treeview menu-open">
           @else
           <li>
           @endif
-          <a href="./inmueble-general"><i class="fa fa-circle-o"></i>Inmuebles generales</a></li>
+          <a id="inmueble-g" href="./inmueble-general"><i class="fa fa-circle-o"></i>Inmuebles generales</a></li>
         @endif
       <li>
-        <a class="nav-link" href="{{route('logout')}}"
+        <a id="logout" class="nav-link" href="{{route('logout')}}"
                 onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();">
                     <i class="nav-icon fa fa-power-off red"></i>

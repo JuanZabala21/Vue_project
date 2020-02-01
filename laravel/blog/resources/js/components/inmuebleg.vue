@@ -81,8 +81,8 @@ td{
               <!-- /.card-body -->
               <div class="card-footer" style="text-align:center">
                   <div id="pag" class="pagination">
-  <a @click="test('prev')">&laquo;</a>
-  <a @click="test('post')">&raquo;</a>
+  <a id="btnprev" @click="test('prev')">&laquo;</a>
+  <a id="btnpost" @click="test('post')">&raquo;</a>
 </div>
 
               </div>

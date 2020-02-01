@@ -2282,7 +2282,33 @@ __webpack_require__.r(__webpack_exports__);
           }
 
           document.getElementById('name' + (i + 1)).innerHTML = data.data.data[i].name;
-          document.getElementById('tipo' + (i + 1)).innerHTML = data.data.data[i].tipo;
+
+          switch (data.data.data[i].tipo) {
+            case "0":
+              document.getElementById('tipo' + (i + 1)).innerHTML = "Terreno";
+              break;
+
+            case "1":
+              document.getElementById('tipo' + (i + 1)).innerHTML = "Apartamento";
+              break;
+
+            case "2":
+              document.getElementById('tipo' + (i + 1)).innerHTML = "Casa";
+              break;
+
+            case "3":
+              document.getElementById('tipo' + (i + 1)).innerHTML = "Fábrica";
+              break;
+
+            case "4":
+              document.getElementById('tipo' + (i + 1)).innerHTML = "Local";
+              break;
+
+            case "5":
+              document.getElementById('tipo' + (i + 1)).innerHTML = "Parcela";
+              break;
+          }
+
           document.getElementById('ubic' + (i + 1)).innerHTML = data.data.data[i].ubicacion;
           document.getElementById('precio' + (i + 1)).innerHTML = data.data.data[i].precio;
           document.getElementById('img' + (i + 1)).innerHTML = '<img src="/images/inmueble/' + data.data.data[i].img + '" style="max-height: 65px;" class="avatar img-circle" id="img" alt="avatar">';
@@ -2358,7 +2384,33 @@ __webpack_require__.r(__webpack_exports__);
           }
 
           document.getElementById('name' + (i + 1)).innerHTML = data.data.data[i].name;
-          document.getElementById('tipo' + (i + 1)).innerHTML = data.data.data[i].tipo;
+
+          switch (data.data.data[i].tipo) {
+            case "0":
+              document.getElementById('tipo' + (i + 1)).innerHTML = "Terreno";
+              break;
+
+            case "1":
+              document.getElementById('tipo' + (i + 1)).innerHTML = "Apartamento";
+              break;
+
+            case "2":
+              document.getElementById('tipo' + (i + 1)).innerHTML = "Casa";
+              break;
+
+            case "3":
+              document.getElementById('tipo' + (i + 1)).innerHTML = "Fábrica";
+              break;
+
+            case "4":
+              document.getElementById('tipo' + (i + 1)).innerHTML = "Local";
+              break;
+
+            case "5":
+              document.getElementById('tipo' + (i + 1)).innerHTML = "Parcela";
+              break;
+          }
+
           document.getElementById('ubic' + (i + 1)).innerHTML = data.data.data[i].ubicacion;
           document.getElementById('precio' + (i + 1)).innerHTML = data.data.data[i].precio;
           document.getElementById('img' + (i + 1)).innerHTML = '<img src="/images/inmueble/' + data.data.data[i].img + '" style="max-height: 65px;" class="avatar img-circle" id="img" alt="avatar">';
@@ -2410,6 +2462,12 @@ __webpack_require__.r(__webpack_exports__);
     submitUpdate: function submitUpdate(e) {
       e.preventDefault();
       var currentObj = this;
+      var band = 1;
+
+      if (document.getElementById("e-image").files.length == 0) {
+        band = 0;
+      }
+
       var config = {
         headers: {
           'content-type': 'multipart/form-data'
@@ -2422,6 +2480,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('ubic', document.getElementById('e-ubic').value);
       formData.append('precio', document.getElementById('e-precio').value);
       formData.append('image', this.image);
+      formData.append('band', band);
       axios.post('/updateInm', formData, config).then(function (response) {
         alert('Inmueble actualizado con exito');
         location.reload();
@@ -2482,7 +2541,33 @@ __webpack_require__.r(__webpack_exports__);
         document.getElementById('tr' + (i + 1)).style.display = "block";
         document.getElementById('id' + (i + 1)).innerHTML = i + 1;
         document.getElementById('name' + (i + 1)).innerHTML = data.data.data[i].name;
-        document.getElementById('tipo' + (i + 1)).innerHTML = data.data.data[i].tipo;
+
+        switch (data.data.data[i].tipo) {
+          case "0":
+            document.getElementById('tipo' + (i + 1)).innerHTML = "Terreno";
+            break;
+
+          case "1":
+            document.getElementById('tipo' + (i + 1)).innerHTML = "Apartamento";
+            break;
+
+          case "2":
+            document.getElementById('tipo' + (i + 1)).innerHTML = "Casa";
+            break;
+
+          case "3":
+            document.getElementById('tipo' + (i + 1)).innerHTML = "Fábrica";
+            break;
+
+          case "4":
+            document.getElementById('tipo' + (i + 1)).innerHTML = "Local";
+            break;
+
+          case "5":
+            document.getElementById('tipo' + (i + 1)).innerHTML = "Parcela";
+            break;
+        }
+
         document.getElementById('ubic' + (i + 1)).innerHTML = data.data.data[i].ubicacion;
         document.getElementById('precio' + (i + 1)).innerHTML = data.data.data[i].precio;
         document.getElementById('img' + (i + 1)).innerHTML = '<img src="/images/inmueble/' + data.data.data[i].img + '" style="max-height: 65px;" class="avatar img-circle" id="img" alt="avatar">';
@@ -73842,6 +73927,7 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-success",
+                    attrs: { id: "addbtn" },
                     on: { click: _vm.newModal }
                   },
                   [
@@ -74175,6 +74261,7 @@ var render = function() {
                 _c(
                   "a",
                   {
+                    attrs: { id: "btnprev" },
                     on: {
                       click: function($event) {
                         return _vm.test("prev")
@@ -74187,6 +74274,7 @@ var render = function() {
                 _c(
                   "a",
                   {
+                    attrs: { id: "btnpost" },
                     on: {
                       click: function($event) {
                         return _vm.test("post")
@@ -74302,8 +74390,7 @@ var render = function() {
                           id: "e-image",
                           name: "Foto",
                           type: "file",
-                          accept: "image/x-png,image/gif,image/jpeg",
-                          required: ""
+                          accept: "image/x-png,image/gif,image/jpeg"
                         },
                         on: { change: _vm.onImageChange }
                       })
@@ -74464,7 +74551,10 @@ var staticRenderFns = [
       _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        {
+          staticClass: "btn btn-primary",
+          attrs: { id: "btndelete", type: "submit" }
+        },
         [_vm._v("Eliminar")]
       )
     ])
@@ -74642,7 +74732,10 @@ var staticRenderFns = [
       _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        {
+          staticClass: "btn btn-primary",
+          attrs: { type: "submit", id: "actualizar" }
+        },
         [_vm._v("Actualizar")]
       )
     ])
@@ -74817,7 +74910,10 @@ var staticRenderFns = [
       _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        {
+          staticClass: "btn btn-primary",
+          attrs: { type: "submit", id: "anadir" }
+        },
         [_vm._v("Añadir")]
       )
     ])
@@ -74957,6 +75053,7 @@ var render = function() {
                 _c(
                   "a",
                   {
+                    attrs: { id: "btnprev" },
                     on: {
                       click: function($event) {
                         return _vm.test("prev")
@@ -74969,6 +75066,7 @@ var render = function() {
                 _c(
                   "a",
                   {
+                    attrs: { id: "btnpost" },
                     on: {
                       click: function($event) {
                         return _vm.test("post")
@@ -75141,7 +75239,11 @@ var render = function() {
                       "margin-top": "160px",
                       "margin-left": "-75px"
                     },
-                    attrs: { type: "submit", value: "Guardar imagen" }
+                    attrs: {
+                      id: "saveimage",
+                      type: "submit",
+                      value: "Guardar imagen"
+                    }
                   })
                 ]
               )
@@ -75407,7 +75509,7 @@ var staticRenderFns = [
         [
           _c("input", {
             staticClass: "btn btn-primary",
-            attrs: { type: "submit", value: "Guardar cambios" }
+            attrs: { type: "submit", id: "save", value: "Guardar cambios" }
           }),
           _vm._v(" "),
           _c("span"),
@@ -75469,6 +75571,7 @@ var render = function() {
                       _c(
                         "a",
                         {
+                          attrs: { id: "activ1" },
                           on: {
                             click: function($event) {
                               return _vm.update("activ", "tr1id")
@@ -75559,6 +75662,7 @@ var render = function() {
                       _c(
                         "a",
                         {
+                          attrs: { id: "activ2" },
                           on: {
                             click: function($event) {
                               return _vm.update("activ", "tr2id")
@@ -75649,6 +75753,7 @@ var render = function() {
                       _c(
                         "a",
                         {
+                          attrs: { id: "activ3" },
                           on: {
                             click: function($event) {
                               return _vm.update("activ", "tr3id")
@@ -75740,6 +75845,7 @@ var render = function() {
                   _c(
                     "a",
                     {
+                      attrs: { id: "btnprev" },
                       on: {
                         click: function($event) {
                           return _vm.test("prev")
@@ -75752,6 +75858,7 @@ var render = function() {
                   _c(
                     "a",
                     {
+                      attrs: { id: "btnprost" },
                       on: {
                         click: function($event) {
                           return _vm.test("post")
@@ -75790,7 +75897,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Correo")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Registrado en")]),
+        _c("th", [_vm._v("Registrado el")]),
         _vm._v(" "),
         _c("th", [_vm._v("Modificar")])
       ])
