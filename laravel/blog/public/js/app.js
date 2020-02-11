@@ -24291,7 +24291,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ntd{\n  font-weight: bold;\n}\n", ""]);
+exports.push([module.i, "\ntd{\r\n  font-weight: bold;\n}\r\n", ""]);
 
 // exports
 
@@ -24310,7 +24310,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ntd{\n  font-weight: bold;\n}\n", ""]);
+exports.push([module.i, "\ntd{\r\n  font-weight: bold;\n}\r\n", ""]);
 
 // exports
 
@@ -24329,7 +24329,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nimg{\n  max-height: 100px;\n    max-width: 100px;\n}\n.form-group {\n    margin-bottom: 0;\n}\nlabel{\n    margin-bottom: 0.25rem;\n    margin-top: 0.25rem;\n}\nbody {\n\t display: -webkit-box;\n\t display: flex;\n\t -webkit-box-orient: vertical;\n\t -webkit-box-direction: normal;\n\t         flex-direction: column;\n\t -webkit-box-align: center;\n\t         align-items: center;\n\t -webkit-box-pack: justify;\n\t         justify-content: space-between;\n\t font-family: \"Lato\", sans-serif;\n}\nh2 {\n\t margin: 50px 0;\n}\nsection {\n\t -webkit-box-flex: 1;\n\t         flex-grow: 1;\n}\n.file-drop-area {\n         margin-left: auto;\n    margin-right: auto;\n\t position: relative;\n\t display: -webkit-box;\n\t display: flex;\n\t -webkit-box-align: center;\n\t         align-items: center;\n     width: 40vw;\n     height: 15vh;\n\t max-width: 100%;\n\t border: 1px dashed black;\n\t border-radius: 3px;\n\t -webkit-transition: 0.2s;\n\t transition: 0.2s;\n}\n.file-drop-area.is-active {\n\t background-color: rgba(255, 255, 255, 0.05);\n}\n.fake-btn {\n         margin-left: auto;\n    margin-right: auto;\n    color: black;\n\t border-radius: 3px;\n\t font-size: 12px;\n\t text-transform: uppercase;\n}\n.file-msg {\n\t font-size: small;\n\t font-weight: 300;\n\t line-height: 1.4;\n\t white-space: nowrap;\n\t overflow: hidden;\n\t text-overflow: ellipsis;\n}\n.file-input {\n\t position: absolute;\n\t left: 0;\n\t top: 0;\n\t height: 100%;\n\t width: 100%;\n\t cursor: pointer;\n\t opacity: 0;\n}\n.file-input:focus {\n\t outline: none;\n}\nfooter {\n\t margin-top: 50px;\n}\nfooter a {\n\t color: rgba(255, 255, 255, 0.4);\n\t font-weight: 300;\n\t font-size: 14px;\n\t text-decoration: none;\n}\nfooter a:hover {\n\t color: white;\n}\n.col-lg-3{\n  max-width:50%;\n}\n \n", ""]);
+exports.push([module.i, "\nimg{\r\n  max-height: 100px;\r\n    max-width: 100px;\n}\n.form-group {\r\n    margin-bottom: 0;\n}\nlabel{\r\n    margin-bottom: 0.25rem;\r\n    margin-top: 0.25rem;\n}\nbody {\r\n\t display: -webkit-box;\r\n\t display: flex;\r\n\t -webkit-box-orient: vertical;\r\n\t -webkit-box-direction: normal;\r\n\t         flex-direction: column;\r\n\t -webkit-box-align: center;\r\n\t         align-items: center;\r\n\t -webkit-box-pack: justify;\r\n\t         justify-content: space-between;\r\n\t font-family: \"Lato\", sans-serif;\n}\nh2 {\r\n\t margin: 50px 0;\n}\nsection {\r\n\t -webkit-box-flex: 1;\r\n\t         flex-grow: 1;\n}\n.file-drop-area {\r\n         margin-left: auto;\r\n    margin-right: auto;\r\n\t position: relative;\r\n\t display: -webkit-box;\r\n\t display: flex;\r\n\t -webkit-box-align: center;\r\n\t         align-items: center;\r\n     width: 40vw;\r\n     height: 15vh;\r\n\t max-width: 100%;\r\n\t border: 1px dashed black;\r\n\t border-radius: 3px;\r\n\t -webkit-transition: 0.2s;\r\n\t transition: 0.2s;\n}\n.file-drop-area.is-active {\r\n\t background-color: rgba(255, 255, 255, 0.05);\n}\n.fake-btn {\r\n         margin-left: auto;\r\n    margin-right: auto;\r\n    color: black;\r\n\t border-radius: 3px;\r\n\t font-size: 12px;\r\n\t text-transform: uppercase;\n}\n.file-msg {\r\n\t font-size: small;\r\n\t font-weight: 300;\r\n\t line-height: 1.4;\r\n\t white-space: nowrap;\r\n\t overflow: hidden;\r\n\t text-overflow: ellipsis;\n}\n.file-input {\r\n\t position: absolute;\r\n\t left: 0;\r\n\t top: 0;\r\n\t height: 100%;\r\n\t width: 100%;\r\n\t cursor: pointer;\r\n\t opacity: 0;\n}\n.file-input:focus {\r\n\t outline: none;\n}\nfooter {\r\n\t margin-top: 50px;\n}\nfooter a {\r\n\t color: rgba(255, 255, 255, 0.4);\r\n\t font-weight: 300;\r\n\t font-size: 14px;\r\n\t text-decoration: none;\n}\nfooter a:hover {\r\n\t color: white;\n}\n.col-lg-3{\r\n  max-width:50%;\n}\r\n \r\n", ""]);
 
 // exports
 
@@ -88696,8 +88696,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\topicos\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\laragon\www\topicos\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\laravel\blog\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel\blog\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -4,12 +4,12 @@ from selenium.webdriver.support.ui import Select
 from time import sleep 
 import os
 # Var´s
-driver = webdriver.Chrome()
+driver = webdriver.Firefox()
 driver.maximize_window()
-delay = 1 # seconds
+delay = 3 # seconds
 delay2 = delay*2
-adminUser="enma2310@outlook.com"
-adminPass="Leon2310"
+adminUser="lebron1@gmail.com"
+adminPass="12345678"
 #Utils
 def update():
     sleep(delay)
@@ -18,7 +18,7 @@ def update():
     driver.find_element_by_id('e-precio').clear()
     driver.find_element_by_id('e-precio').send_keys("5000")
     Select(driver.find_element_by_id('e-tipo')).select_by_visible_text('Parcela')
-    driver.find_element_by_id("e-image").send_keys(os.getcwd()+"/example2.jpg")
+    driver.find_element_by_id("e-image").send_keys(os.getcwd()+"\example2.jpg")
     driver.find_element_by_id('actualizar').click()
     sleep(delay)
     driver.switch_to.alert.accept()
@@ -35,6 +35,9 @@ driver.find_element_by_id('password').send_keys("Test1234")
 driver.find_element_by_id('password_confirmation').send_keys("Test1234")
 sleep(delay)
 driver.find_element_by_id('submit').click()
+sleep(delay)      
+driver.find_element_by_id('logout').click()
+sleep(delay)
 #Admin test 1
 #Login
 sleep(delay)
@@ -49,16 +52,16 @@ driver.find_element_by_id('users').click()
 sleep(delay)
 while True:
     if(str(driver.find_element_by_id('tr1email').text)=="example@test.com"):
-        driver.find_element_by_id('activ1').click()
+        driver.find_element_by_id('act1').click()
         break
     elif(str(driver.find_element_by_id('tr2email').text)=="example@test.com"):
-        driver.find_element_by_id('activ2').click()
+        driver.find_element_by_id('act2').click()
         break
     elif(str(driver.find_element_by_id('tr3email').text)=="example@test.com"):
-        driver.find_element_by_id('activ3').click()
+        driver.find_element_by_id('act3').click()
         break
     else:
-        driver.find_element_by_id('btnpost').click()
+        driver.find_element_by_id('btnprost').click()
         sleep(delay)
 sleep(delay)      
 driver.find_element_by_id('logout').click()
@@ -84,7 +87,7 @@ driver.find_element_by_id('save').click()
 sleep(delay)
 driver.switch_to.alert.accept()
 sleep(delay)
-driver.find_element_by_id("image").send_keys(os.getcwd()+"/profile.png")
+driver.find_element_by_id("image").send_keys(os.getcwd()+"\profile.png")
 sleep(delay)
 driver.find_element_by_id('saveimage').click()
 sleep(delay)
@@ -100,7 +103,7 @@ Select(driver.find_element_by_id('n-tipo')).select_by_visible_text('Casa')
 Select(driver.find_element_by_id('n-ubic')).select_by_visible_text('San Diego')
 driver.find_element_by_id('n-precio').clear()
 driver.find_element_by_id('n-precio').send_keys("6000")
-driver.find_element_by_id("image").send_keys(os.getcwd()+"/example.jpg")
+driver.find_element_by_id("image").send_keys(os.getcwd()+"\example.jpg")
 driver.find_element_by_id('anadir').click()
 sleep(delay)
 driver.switch_to.alert.accept()
@@ -113,7 +116,7 @@ Select(driver.find_element_by_id('n-tipo')).select_by_visible_text('Apartamento'
 Select(driver.find_element_by_id('n-ubic')).select_by_visible_text('Bejuma')
 driver.find_element_by_id('n-precio').clear()
 driver.find_element_by_id('n-precio').send_keys("3000")
-driver.find_element_by_id("image").send_keys(os.getcwd()+"/example.jpg")
+driver.find_element_by_id("image").send_keys(os.getcwd()+"\example.jpg")
 driver.find_element_by_id('anadir').click()
 sleep(delay)
 driver.switch_to.alert.accept()
