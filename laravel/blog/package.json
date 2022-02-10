@@ -28,7 +28,7 @@
         "adminlte": "^2.4.1",
         "chart.js": "^2.9.3",
         "laravel-vue-pagination": "^2.3.1",
-        "node-sass": "^4.13.0",
+        "node-sass": "^7.0.0",
         "vue-chartjs": "^3.5.0",
         "vue-progressbar": "^0.7.5",
         "vue-resource": "^1.5.1",
